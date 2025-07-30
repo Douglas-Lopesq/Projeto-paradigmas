@@ -1,3 +1,19 @@
 from django.db import models
 
-# Create your models here.
+from people.models import BaseModel
+
+class Curso(BaseModel):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
+
+    def __str__(self):
+        return self.nome
+
+
+class Aluno(BaseModel):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nome
